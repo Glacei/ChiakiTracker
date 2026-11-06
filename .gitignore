@@ -1,0 +1,16 @@
+# Cachés y compilados de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Entornos virtuales (si creas uno localmente en el futuro, ej: venv/ o .venv/)
+venv/
+.venv/
+ENV/
+
+# Archivos de datos locales del usuario (para que la base de datos o listas de prueba no se suban)
+data.json
+
+# Archivos de configuración del sistema operativo
+.DS_Store
+Thumbs.db
