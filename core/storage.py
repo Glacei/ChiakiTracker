@@ -2,7 +2,7 @@ import json
 import os
 
 class StorageManager:
-    """Gestiona la carga y guardado de las listas de logros y opciones en un archivo JSON local."""
+    """Gestiona la carga y guardado de las listas de logros, notas y opciones en un archivo JSON local."""
     def __init__(self, filename="data.json"):
         base_dir = os.path.dirname(os.path.abspath(__file__))
         self.filepath = os.path.join(base_dir, "..", filename)
@@ -14,8 +14,8 @@ class StorageManager:
                 "margen_izquierdo": 20,
                 "margen_inferior": -10,
                 "mostrar_imagen": True,
-                "escala_menu": 1.0,        # 1.0 = Tamaño normal (340x420)
-                "opacidad_overlay": 1.0    # 1.0 = Opaco, valores menores lo hacen translúcido
+                "escala_menu": 1.0,       # 1.0 = Tamaño normal (340x420)
+                "opacidad_overlay": 1.0   # 1.0 = Opaco, valores menores lo hacen translúcido
             },
             "listas": {
                 "General": [
@@ -26,7 +26,8 @@ class StorageManager:
                     {"nombre": "Encontrar la llave dorada", "completado": False},
                     {"nombre": "Recoger 100 monedas", "completado": False}
                 ]
-            }
+            },
+            "notas": {}  # <-- Añadido para almacenar el bloc de notas
         }
         
         if os.path.exists(self.filepath):
@@ -36,12 +37,22 @@ class StorageManager:
                     if "listas" not in data and "opciones" not in data:
                         return {
                             "opciones": default_data["opciones"],
-                            "listas": data
+                            "listas": data,
+                            "notas": {}
                         }
+                    
+                    # Asegurar que existan todas las claves principales si el JSON es antiguo
+                    if "notas" not in data:
+                        data["notas"] = {}
+                    
                     # Asegurar que las nuevas opciones existan si el JSON es antiguo
-                    for k, v in default_data["opciones"].items():
-                        if k not in data["opciones"]:
-                            data["opciones"][k] = v
+                    if "opciones" in data:
+                        for k, v in default_data["opciones"].items():
+                            if k not in data["opciones"]:
+                                data["opciones"][k] = v
+                    else:
+                        data["opciones"] = default_data["opciones"]
+
                     return data
             except Exception as e:
                 print(f"Error al leer el archivo de datos: {e}")

@@ -26,6 +26,6 @@ if __name__ == "__main__":
     listener.start()
 
     # Notificación de prueba inicial
-    QTimer.singleShot(1500, lambda: overlay.mostrar_notificacion("¡Aplicación modular con persistencia JSON activa!"))
+    QTimer.singleShot(1500, lambda: overlay.mostrar_notificacion("Buenos dias... Que hacemos hoy?"))
 
     sys.exit(app.exec())

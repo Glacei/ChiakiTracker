@@ -1,16 +1,17 @@
-# Cachés y compilados de Python
-__pycache__/
-*.py[cod]
-*$py.class
-
-# Entornos virtuales (si creas uno localmente en el futuro, ej: venv/ o .venv/)
+# Entornos virtuales de Python
 venv/
-.venv/
-ENV/
+env/
+__pycache__/
+*.pyc
 
-# Archivos de datos locales del usuario (para que la base de datos o listas de prueba no se suban)
+# Archivos de compilación de PyInstaller
+build/
+dist/
+*.spec
+
+# Datos de la aplicación y bases de datos locales
 data.json
 
-# Archivos de configuración del sistema operativo
+# Cachés del sistema operativo
 .DS_Store
 Thumbs.db
